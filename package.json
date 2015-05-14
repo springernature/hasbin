@@ -1,0 +1,35 @@
+{
+	"name": "hasbin",
+	"version": "0.0.0",
+
+	"description": "Check whether a binary exists in the PATH environment variable",
+	"keywords": [ "bin", "check", "path" ],
+	"author": "Rowan Manning (http://rowanmanning.com/)",
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rowanmanning/hasbin.git"
+	},
+	"homepage": "https://github.com/rowanmanning/hasbin",
+	"bugs": "https://github.com/rowanmanning/hasbin/issues",
+	"license": "MIT",
+
+	"engines": {
+		"node": ">=0.10"
+	},
+	"dependencies": {
+		"async": "~0.9"
+	},
+	"devDependencies": {
+		"jshint": "~2.7",
+		"mocha": "~2.2",
+		"mockery": "~1.4",
+		"proclaim": "~3.2",
+		"sinon": "~1.14"
+	},
+
+	"main": "./lib/hasbin.js",
+	"scripts": {
+		"test": "make ci"
+	}
+}

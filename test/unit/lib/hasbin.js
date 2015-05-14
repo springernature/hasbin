@@ -18,8 +18,10 @@ describe('lib/hasbin', function () {
 
 		fs.stat.withArgs('/usr/bin/foo').yieldsAsync(null, fs.mockStatIsFile);
 		fs.stat.withArgs('/usr/bin/baz').yieldsAsync(null, fs.mockStatIsFile);
+		fs.stat.withArgs('/usr/bin/error').yieldsAsync(new Error());
 		fs.statSync.withArgs('/usr/bin/foo').returns(fs.mockStatIsFile);
 		fs.statSync.withArgs('/usr/bin/baz').returns(fs.mockStatIsFile);
+		fs.statSync.withArgs('/usr/bin/error').throws(new Error());
 
 		hasbin = require('../../../lib/hasbin');
 
@@ -34,26 +36,32 @@ describe('lib/hasbin', function () {
 	});
 
 	describe('hasbin()', function () {
-		var passingResult, failingResult;
+		var passingResult, failingResult, errorResult;
 
 		beforeEach(function (done) {
 			hasbin('foo', function (result) {
 				passingResult = result;
 				hasbin('bar', function (result) {
 					failingResult = result;
-					done();
+					hasbin('error', function (result) {
+						errorResult = result;
+						done();
+					});
 				});
 			});
 		});
 
 		it('should call `fs.stat()` and `stat.isFile()` for the binary on each path in `process.env.PATH`', function () {
-			assert.callCount(fs.stat, 6);
+			assert.callCount(fs.stat, 9);
 			assert.calledWith(fs.stat, '/bin/foo');
 			assert.calledWith(fs.stat, '/usr/bin/foo');
 			assert.calledWith(fs.stat, '/usr/local/bin/foo');
 			assert.calledWith(fs.stat, '/bin/bar');
 			assert.calledWith(fs.stat, '/usr/bin/bar');
 			assert.calledWith(fs.stat, '/usr/local/bin/bar');
+			assert.calledWith(fs.stat, '/bin/error');
+			assert.calledWith(fs.stat, '/usr/bin/error');
+			assert.calledWith(fs.stat, '/usr/local/bin/error');
 		});
 
 		it('should callback with `true` if a matching binary is found', function () {
@@ -64,6 +72,10 @@ describe('lib/hasbin', function () {
 			assert.isFalse(failingResult);
 		});
 
+		it('should callback with `false` if an error occurs', function () {
+			assert.isFalse(errorResult);
+		});
+
 	});
 
 	it('should have a `sync` method', function () {
@@ -71,21 +83,25 @@ describe('lib/hasbin', function () {
 	});
 
 	describe('hasbin.sync()', function () {
-		var passingResult, failingResult;
+		var passingResult, failingResult, errorResult;
 
 		beforeEach(function () {
 			passingResult = hasbin.sync('foo');
 			failingResult = hasbin.sync('bar');
+			errorResult = hasbin.sync('error');
 		});
 
 		it('should call `fs.statSync()` and `stat.isFile()` for the binary on each path in `process.env.PATH`', function () {
-			assert.callCount(fs.statSync, 5);
+			assert.callCount(fs.statSync, 8);
 			assert.calledWith(fs.statSync, '/bin/foo');
 			assert.calledWith(fs.statSync, '/usr/bin/foo');
+			assert.neverCalledWith(fs.statSync, '/usr/local/bin/foo');
 			assert.calledWith(fs.statSync, '/bin/bar');
 			assert.calledWith(fs.statSync, '/usr/bin/bar');
 			assert.calledWith(fs.statSync, '/usr/local/bin/bar');
-			assert.neverCalledWith(fs.statSync, '/usr/local/bin/foo');
+			assert.calledWith(fs.statSync, '/bin/error');
+			assert.calledWith(fs.statSync, '/usr/bin/error');
+			assert.calledWith(fs.statSync, '/usr/local/bin/error');
 		});
 
 		it('should return `true` if a matching binary is found', function () {
@@ -94,6 +110,10 @@ describe('lib/hasbin', function () {
 
 		it('should return `false` if a matching binary is not found', function () {
 			assert.isFalse(failingResult);
+		});
+
+		it('should return `false` if an error occurs', function () {
+			assert.isFalse(errorResult);
 		});
 
 	});

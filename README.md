@@ -168,18 +168,18 @@ License
 -------
 
 HasBin is licensed under the [MIT][info-license] license.  
-Copyright &copy; 2015, Rowan Manning
+Copyright &copy; 2015, Nature Publishing Group
 
 
 
 [npm]: https://npmjs.org/
-[info-dependencies]: https://gemnasium.com/rowanmanning/hasbin
+[info-dependencies]: https://gemnasium.com/nature/hasbin
 [info-license]: LICENSE
 [info-node]: package.json
 [info-npm]: https://www.npmjs.com/package/hasbin
-[info-build]: https://travis-ci.org/rowanmanning/hasbin
-[shield-dependencies]: https://img.shields.io/gemnasium/rowanmanning/hasbin.svg
+[info-build]: https://travis-ci.org/nature/hasbin
+[shield-dependencies]: https://img.shields.io/gemnasium/nature/hasbin.svg
 [shield-license]: https://img.shields.io/badge/license-MIT-blue.svg
 [shield-node]: https://img.shields.io/node/v/hasbin.svg?label=node.js+support
 [shield-npm]: https://img.shields.io/npm/v/hasbin.svg
-[shield-build]: https://img.shields.io/travis/rowanmanning/hasbin/master.svg
+[shield-build]: https://img.shields.io/travis/nature/hasbin/master.svg

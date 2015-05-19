@@ -4,14 +4,18 @@
 
 	"description": "Check whether a binary exists in the PATH environment variable",
 	"keywords": [ "bin", "check", "path" ],
-	"author": "Rowan Manning (http://rowanmanning.com/)",
+
+	"author": "Nature Publishing Group",
+	"contributors": [
+		"Rowan Manning (http://rowanmanning.com/)"
+	],
 
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/rowanmanning/hasbin.git"
+		"url": "https://github.com/nature/hasbin.git"
 	},
-	"homepage": "https://github.com/rowanmanning/hasbin",
-	"bugs": "https://github.com/rowanmanning/hasbin/issues",
+	"homepage": "https://github.com/nature/hasbin",
+	"bugs": "https://github.com/nature/hasbin/issues",
 	"license": "MIT",
 
 	"engines": {

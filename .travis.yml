@@ -7,3 +7,10 @@ node_js:
 
 # Build script
 script: make ci
+
+# Notifications
+notifications:
+  email:
+    - j.robinson@nature.com
+    - rowan.manning@nature.com
+  slack: thefeds:vG3hLYB07EwTYpQFp3TNUx82

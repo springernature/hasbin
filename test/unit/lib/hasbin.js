@@ -5,13 +5,14 @@
 var assert = require('proclaim');
 var mockery = require('mockery');
 var sinon = require('sinon');
+var path = require('path');
 
 describe('lib/hasbin', function () {
 	var fs, hasbin;
 
 	beforeEach(function () {
 
-		process.env.PATH = '/bin:/usr/bin/:/usr/local/bin';
+		process.env.PATH = ['/bin', '/usr/bin', '/usr/local/bin'].join(path.delimiter);
 
 		fs = require('../mock/fs');
 		mockery.registerMock('fs', fs);

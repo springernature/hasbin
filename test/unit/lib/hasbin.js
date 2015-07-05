@@ -79,6 +79,30 @@ describe('lib/hasbin', function () {
 
 	});
 
+	describe('hasbin() with PATHEXT', function () {
+		beforeEach(function (done) {
+			process.env.PATHEXT = ['.COM', '.EXE'].join(path.delimiter);
+			hasbin('foo', function () {
+				done();
+			});
+		});
+
+		afterEach(function () {
+			process.env.PATHEXT = '';
+		});
+
+		it('should call `fs.stat()` for the binary on each path in `process.env.PATH` with each extension in `process.env.PATHEXT`', function () {
+			assert.callCount(fs.stat, 6);
+			assert.calledWith(fs.stat, '/bin/foo.COM');
+			assert.calledWith(fs.stat, '/bin/foo.EXE');
+			assert.calledWith(fs.stat, '/usr/bin/foo.COM');
+			assert.calledWith(fs.stat, '/usr/bin/foo.EXE');
+			assert.calledWith(fs.stat, '/usr/local/bin/foo.COM');
+			assert.calledWith(fs.stat, '/usr/local/bin/foo.EXE');
+		});
+	});
+
+
 	it('should have a `sync` method', function () {
 		assert.isFunction(hasbin.sync);
 	});

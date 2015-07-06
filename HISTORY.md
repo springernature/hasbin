@@ -1,6 +1,12 @@
 
 # History
 
+## 1.1.0 (2015-07-06)
+
+  * Use the `PATHEXT` environment variable in Windows when looking for binaries
+  * Fix an issue which broke Windows support
+  * Update dependencies
+
 ## 1.0.0 (2015-06-23)
 
   * Stable release

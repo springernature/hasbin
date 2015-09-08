@@ -79,6 +79,27 @@ describe('lib/hasbin', function () {
 
 	});
 
+	describe('hasbin() without PATH', function () {
+		var oldPath;
+
+		beforeEach(function (done) {
+			oldPath = process.env.PATH;
+			delete process.env.PATH;
+			hasbin('foo', function () {
+				done();
+			});
+		});
+
+		afterEach(function () {
+			process.env.PATH = oldPath;
+		});
+
+		it('should call `fs.stat()` for the binary alone', function () {
+			assert.callCount(fs.stat, 1);
+			assert.calledWith(fs.stat, 'foo');
+		});
+	});
+
 	describe('hasbin() with PATHEXT', function () {
 		beforeEach(function (done) {
 			process.env.PATHEXT = ['.COM', '.EXE'].join(path.delimiter);
@@ -101,7 +122,6 @@ describe('lib/hasbin', function () {
 			assert.calledWith(fs.stat, '/usr/local/bin/foo.EXE');
 		});
 	});
-
 
 	it('should have a `sync` method', function () {
 		assert.isFunction(hasbin.sync);

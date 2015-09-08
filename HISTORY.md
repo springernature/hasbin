@@ -1,6 +1,11 @@
 
 # History
 
+## 1.1.1 (2015-09-08)
+
+  * Update dependencies
+  * Add code coverage reporting
+
 ## 1.1.0 (2015-07-06)
 
   * Use the `PATHEXT` environment variable in Windows when looking for binaries

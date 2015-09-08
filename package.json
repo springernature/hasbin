@@ -1,6 +1,6 @@
 {
 	"name": "hasbin",
-	"version": "1.1.0",
+	"version": "1.1.1",
 
 	"description": "Check whether a binary exists in the PATH environment variable",
 	"keywords": [ "bin", "check", "path" ],

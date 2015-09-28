@@ -7,6 +7,7 @@ Check whether a binary exists in the `PATH` environment variable.
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
 [![Build status][shield-build]][info-build]
+[![Code coverage][shield-coverage]][info-coverage]
 [![Dependencies][shield-dependencies]][info-dependencies]
 [![MIT licensed][shield-license]][info-license]
 
@@ -173,11 +174,13 @@ Copyright &copy; 2015, Nature Publishing Group
 
 
 [npm]: https://npmjs.org/
+[info-coverage]: https://coveralls.io/github/nature/hasbin
 [info-dependencies]: https://gemnasium.com/nature/hasbin
 [info-license]: LICENSE
 [info-node]: package.json
 [info-npm]: https://www.npmjs.com/package/hasbin
 [info-build]: https://travis-ci.org/nature/hasbin
+[shield-coverage]: https://img.shields.io/coveralls/nature/hasbin.svg
 [shield-dependencies]: https://img.shields.io/gemnasium/nature/hasbin.svg
 [shield-license]: https://img.shields.io/badge/license-MIT-blue.svg
 [shield-node]: https://img.shields.io/badge/node.js%20support-0.10–4-brightgreen.svg

@@ -11,5 +11,11 @@ branches:
   only:
     - master
 
+# Before install
+before_install:
+  - npm install coveralls
+
 # Build script
-script: make ci
+script:
+  - make ci
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls

@@ -22,7 +22,7 @@
 		"node": ">=0.10 <=5"
 	},
 	"dependencies": {
-		"async": "~1.4"
+		"async": "~1.5"
 	},
 	"devDependencies": {
 		"istanbul": "~0.3",

@@ -31,6 +31,11 @@ hasbin.all(['node', 'npm'], function (result) {
 hasbin.some(['node', 'wtf'], function (result) {
     // result === true
 });
+
+// Find the first available binary
+hasbin.first(['node', 'npm'], function (result) {
+	// result === 'node'
+});
 ```
 
 
@@ -150,6 +155,38 @@ return Boolean
 ```js
 // Example
 result = hasbin.some.sync(['node', 'npm']);
+```
+
+### `hasbin.first(binaryNames, callback)`
+
+Checks the list of `binaryNames` to find the first binary that exists on one of the paths in `process.env.PATH`. Calls back with the name of the first matched binary if one exists and `false` otherwise.
+
+```js
+// Arguments
+binaryNames = Array(String)
+callback = Function(String|false)
+```
+
+```js
+// Example
+hasbin.first(['node', 'npm'], function (result) {
+    // result === 'node'
+});
+```
+
+### `hasbin.first.sync(binaryNames)`
+
+Synchronous `hasbin.first`.
+
+```js
+// Arguments
+binaryNames = Array(String)
+return String|false
+```
+
+```js
+// Example
+result = hasbin.first.sync(['node', 'npm']);
 ```
 
 

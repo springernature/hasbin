@@ -1,11 +1,16 @@
 
 # Language/versions
 language: node_js
-node_js:
-  - "5"
-  - "4"
-  - "0.12"
-  - "0.10"
+matrix:
+  include:
+
+    - node_js: "5"
+    - node_js: "4"
+    - node_js: "0.12"
+      env: LINT=true
+    - node_js: "0.12"
+    - node_js: "0.10"
+
 
 # Build only master (and pull-requests)
 branches:
@@ -18,5 +23,6 @@ before_install:
 
 # Build script
 script:
-  - make ci
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+  - 'if [ $LINT ]; then make lint; fi'
+  - 'if [ ! $LINT ]; then make test; fi'
+  - 'if [ ! $LINT ]; then cat ./coverage/lcov.info | ./node_modules/.bin/coveralls; fi'

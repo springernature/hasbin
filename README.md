@@ -34,7 +34,7 @@ hasbin.some(['node', 'wtf'], function (result) {
 
 // Find the first available binary
 hasbin.first(['node', 'npm'], function (result) {
-	// result === 'node'
+    // result === 'node'
 });
 ```
 

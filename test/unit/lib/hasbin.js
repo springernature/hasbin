@@ -328,4 +328,77 @@ describe('lib/hasbin', function () {
 
 	});
 
+	it('should have a `first` method', function () {
+		assert.isFunction(hasbin.first);
+	});
+
+	describe('hasbin.first()', function () {
+		var passingResult, failingResult;
+
+		beforeEach(function (done) {
+			hasbin.async = sinon.stub();
+			hasbin.async.withArgs('foo').yieldsAsync(true);
+			hasbin.async.withArgs('bar').yieldsAsync(false);
+			hasbin.async.withArgs('baz').yieldsAsync(false);
+			hasbin.async.withArgs('qux').yieldsAsync(false);
+			hasbin.first(['foo', 'bar'], function (result) {
+				passingResult = result;
+				hasbin.first(['baz', 'qux'], function (result) {
+					failingResult = result;
+					done();
+				});
+			});
+		});
+
+		it('should call `hasbin.async()` for each binary', function () {
+			assert.callCount(hasbin.async, 4);
+			assert.calledWith(hasbin.async, 'foo');
+			assert.calledWith(hasbin.async, 'bar');
+			assert.calledWith(hasbin.async, 'baz');
+			assert.calledWith(hasbin.async, 'qux');
+		});
+
+		it('should return the name of the first binary if some matching binaries are found', function () {
+			assert.strictEqual('foo', passingResult);
+		});
+
+		it('should return `false` if no matching binaries are found', function () {
+			assert.isFalse(failingResult);
+		});
+	});
+
+	it('should have a `first.sync` method', function () {
+		assert.isFunction(hasbin.first.sync);
+	});
+
+	describe('hasbin.first.sync()', function () {
+		var passingResult, failingResult;
+
+		beforeEach(function () {
+			hasbin.sync = sinon.stub();
+			hasbin.sync.withArgs('foo').returns(true);
+			hasbin.sync.withArgs('bar').returns(false);
+			hasbin.sync.withArgs('baz').returns(false);
+			hasbin.sync.withArgs('qux').returns(false);
+			passingResult = hasbin.first.sync(['foo', 'bar']);
+			failingResult = hasbin.first.sync(['baz', 'qux']);
+		});
+
+		it('should call `hasbin.sync()` for each binary', function () {
+			assert.callCount(hasbin.sync, 4);
+			assert.calledWith(hasbin.sync, 'foo');
+			assert.calledWith(hasbin.sync, 'bar');
+			assert.calledWith(hasbin.sync, 'baz');
+			assert.calledWith(hasbin.sync, 'qux');
+		});
+
+		it('should return the name of the first binary if some matching binaries are found', function () {
+			assert.strictEqual('foo', passingResult);
+		});
+
+		it('should return `false` if no matching binaries are found', function () {
+			assert.isFalse(failingResult);
+		});
+
+	});
 });

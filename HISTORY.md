@@ -1,6 +1,10 @@
 
 # History
 
+## 1.2.0 (2016-01-06)
+
+  * Add `hasbin.first` and `hasbin.first.sync` for finding the first available binary
+
 ## 1.1.3 (2015-11-09)
 
   * Support Node.js 5.x

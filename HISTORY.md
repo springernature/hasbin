@@ -1,6 +1,11 @@
 
 # History
 
+## 1.2.1 (2016-02-09)
+
+  * Update repository references to springernature
+  * Update the license
+
 ## 1.2.0 (2016-01-06)
 
   * Add `hasbin.first` and `hasbin.first.sync` for finding the first available binary

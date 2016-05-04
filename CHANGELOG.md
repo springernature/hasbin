@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.2.2 (2016-05-05)
+
+  * Support Node.js 6.x
+
 ## 1.2.1 (2016-02-09)
 
   * Update repository references to springernature

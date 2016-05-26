@@ -401,4 +401,32 @@ describe('lib/hasbin', function () {
 		});
 
 	});
+
+	describe('hasbin() with quotes in PATH', function () {
+		var passingResult, oldPath, pathArr;
+
+		beforeEach(function (done) {
+			oldPath = process.env.PATH;
+			pathArr = process.env.PATH.split(path.delimiter);
+			pathArr.push('"/win"');
+			process.env.PATH = pathArr.join(path.delimiter);
+
+			fs.stat.withArgs('/win/norf').yieldsAsync(null, fs.mockStatIsFile);
+			fs.statSync.withArgs('/win/norf').returns(fs.mockStatIsFile);
+
+			hasbin('norf', function (result) {
+				passingResult = result;
+				done();
+			});
+		});
+
+		afterEach(function () {
+			process.env.PATH = oldPath;
+		});
+
+		it('should return `true` if PATH entries are wrapped in quotes and binaries are found', function () {
+			assert.isTrue(passingResult);
+		});
+
+	});
 });

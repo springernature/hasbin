@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.2.3 (2016-05-27)
+
+  * Fix Windows 10 quoted PATH entries
+
 ## 1.2.2 (2016-05-05)
 
   * Support Node.js 6.x
